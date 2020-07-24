@@ -10,4 +10,10 @@ class NeteaseMusicCipher {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<Map> encrypt(String content) async{
+    final Map params =  await _channel.invokeMethod("encrypt", content);
+    return params;
+  }
+
 }
