@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* 完成Android端的加密功能
