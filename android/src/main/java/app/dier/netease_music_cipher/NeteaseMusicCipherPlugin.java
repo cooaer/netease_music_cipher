@@ -28,12 +28,12 @@ public class NeteaseMusicCipherPlugin
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
     
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding)
     {
-        channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "netease_music_cipher");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "netease_music_cipher");
         channel.setMethodCallHandler(this);
     }
     
