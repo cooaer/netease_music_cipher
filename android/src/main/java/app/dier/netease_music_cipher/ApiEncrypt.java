@@ -1,10 +1,11 @@
 package app.dier.netease_music_cipher;
 
+import android.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.math.BigInteger;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -109,8 +110,9 @@ public class ApiEncrypt
         // 数据处理
         encryptedBytes = cipher.doFinal(byteContent);
         // 此处使用BASE64做转码功能，同时能起到2次加密的作用
-        return new String(Base64.getEncoder().encode(encryptedBytes), "UTF-8");
-//        return new String(Base64.encode(encryptedBytes, 0), "UTF-8");
+
+//        return new String(Base64.getEncoder().encode(encryptedBytes), "UTF-8");
+        return new String(Base64.encode(encryptedBytes, 0), "UTF-8");
     }
     
     /**
