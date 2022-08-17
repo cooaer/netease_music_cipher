@@ -17,7 +17,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await NeteaseMusicCipher.platformVersion, '42');
+  test('encryptWeapi', () async {
+    expect(await NeteaseMusicCipher.encryptWeapi, '42');
   });
 }

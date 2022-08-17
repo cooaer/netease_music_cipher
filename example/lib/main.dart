@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:netease_music_cipher/netease_music_cipher.dart';
 
@@ -14,8 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  Map _cipherText = {'params':'init'};
+  Map _cipherText = {'params': 'init'};
 
   @override
   void initState() {
@@ -25,15 +24,15 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
     Map cipherText;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await NeteaseMusicCipher.platformVersion;
-      cipherText = await NeteaseMusicCipher.encrypt("content");
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-      _cipherText = {'params':"error"};
+      cipherText = await NeteaseMusicCipher.encryptEapi(
+          "https://github.com/cooaer/netease_music_cipher", "content");
+    } on PlatformException catch (e) {
+      cipherText = {'params': "error"};
+      debugPrint(
+          "encrypt error, code = ${e.code}, details = ${e.details}, message = ${e.message}, stack = ${e.stacktrace}");
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -42,7 +41,6 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
       _cipherText = cipherText;
     });
   }
